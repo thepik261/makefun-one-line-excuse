@@ -17,6 +17,12 @@ if (EXCUSE.includes("\n")) {
 if (!/\S/.test(EXCUSE)) {
   throw new Error("excuse must not be only white space");
 }
+if (EXCUSE !== EXCUSE.trim()) {
+  throw new Error("excuse must not start or end with white space");
+}
+if (!/[.!?]$/.test(EXCUSE)) {
+  throw new Error("excuse must end with terminal punctuation so it lands as one line");
+}
 
 mkdirSync("/output", { recursive: true });
 writeFileSync("/output/entry.txt", EXCUSE, "utf8");
